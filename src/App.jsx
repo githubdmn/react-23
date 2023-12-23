@@ -11,12 +11,12 @@ function App() {
     { id: 3, text: 'Comment three' },
   ];
   
-
-  return (
-    <div className='container'> 
-      <h1>{title.toUpperCase()}</h1>
-      <p>{body}</p>
-      <div className='comments'>
+  const loading = true;
+  if(!loading) return <h3>Loading</h3>;
+  
+  const showContent = true;
+  const commentBlock = ( 
+    <div className='comments'>
         <h3> Comments ({comments.length}) </h3>
         <ul> 
           {comments.map((comment, index) => (
@@ -24,7 +24,15 @@ function App() {
           ))}
         </ul>
       </div>
-    </div>);
+  )
+
+  return (
+    <div className='container'> 
+      <h1>{title.toUpperCase()}</h1>
+      <p>{body}</p>
+    {showContent && commentBlock}
+    </div> 
+  );
 }
 
 export default App;
