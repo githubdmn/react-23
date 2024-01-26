@@ -1,5 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import styles from './protectedLayout.module.css';
 
 export const ProtectedLayout = () => {
-  return <Outlet />;
+  return (
+    <div className={styles.protectedLayoutContainer}>
+      <Outlet />
+    </div>
+  );
 };

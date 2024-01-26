@@ -1,8 +1,32 @@
 .button {
+  position: relative;
   width: 100%;
-  background-color: darkslategray;
+  font-weight: 600;
   color: white;
+}
+
+.primaryButton {
+  background-color: #2f4f4f;
   padding: 1rem;
   border-radius: 0.25rem;
-  font-weight: 600;
+}
+
+.primaryButton:hover {
+  background-color: #3e5c5c;
+}
+
+.secondaryButton {
+  background-color: #b8860b;
+  padding: 0.5rem;
+}
+
+.secondaryButton:hover {
+  background-color: #c28f0f;
+}
+
+.iconContainer {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }

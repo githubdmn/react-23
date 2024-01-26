@@ -1,0 +1,23 @@
+.logOutButtonWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15rem;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.listTitle {
+  font-weight: 600;
+}
+
+.listItemsWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+}

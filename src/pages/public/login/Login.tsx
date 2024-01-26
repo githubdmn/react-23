@@ -1,14 +1,19 @@
 import styles from './login.module.css';
 import publicStyles from '../../../shared/styles/public-styles/publicStyles.module.css';
 import { Button } from '../../../components/ui/button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../../router/routes';
 import { LoginFormData, loginFormFields, loginSchema } from './loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/ui/input/FormInput';
+import { useUser } from '../../../store/user/UserContext';
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  const { setUser } = useUser();
+
   const {
     register,
     formState: { errors },
@@ -19,11 +24,13 @@ export const Login = () => {
   });
 
   const handleLoginFormSubmit = (data: LoginFormData) => {
-    console.log(data);
+    //TODO: update with the backend request and set back response as a user + set tokens
+    setUser({ id: '1', username: 'Test', email: data.email });
+    navigate(routes.root, { replace: true });
   };
 
   return (
-    <>
+    <main>
       <div className={styles.loginHeaderWrapper}>
         <h1>Welcome to Todo application</h1>
         <p>Login to your account</p>
@@ -52,6 +59,6 @@ export const Login = () => {
         <p>Don't have an account?</p>
         <Link to={routes.register}>Register</Link>
       </div>
-    </>
+    </main>
   );
 };

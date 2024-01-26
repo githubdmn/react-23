@@ -1,7 +1,7 @@
 import { FormInput } from '../../../components/ui/input/FormInput';
 import publicStyles from '../../../shared/styles/public-styles/publicStyles.module.css';
 import { Button } from '../../../components/ui/button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../../router/routes';
 import {
   RegisterFormData,
@@ -13,6 +13,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 
 export const Registration = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -28,6 +30,8 @@ export const Registration = () => {
   const { password, confirmPassword } = watch();
 
   const handleRegisterFormSubmit = (data: RegisterFormData) => {
+    //TODO: update with the backend POST request, send data to BE then redirect to Login
+    navigate(routes.auth);
     console.log(data);
   };
 
@@ -44,8 +48,8 @@ export const Registration = () => {
   }, [password, confirmPassword, clearErrors, setError]);
 
   return (
-    <div>
-      <h1>Register to our application</h1>
+    <main>
+      <h1>Register to our Todo application</h1>
       <form
         onSubmit={handleSubmit(handleRegisterFormSubmit)}
         className={publicStyles.formWrapper}
@@ -82,6 +86,6 @@ export const Registration = () => {
         <p>Already have an account?</p>
         <Link to={routes.auth}>Log In</Link>
       </div>
-    </div>
+    </main>
   );
 };
