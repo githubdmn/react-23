@@ -1,14 +1,26 @@
-import { useState } from 'react';
-import { Input } from '../../../components/ui/input/Input';
 import styles from './login.module.css';
 import publicStyles from '../../../shared/styles/public-styles/publicStyles.module.css';
 import { Button } from '../../../components/ui/button/Button';
 import { Link } from 'react-router-dom';
 import { routes } from '../../../router/routes';
+import { LoginFormData, loginFormFields, loginSchema } from './loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { FormInput } from '../../../components/ui/input/FormInput';
 
 export const Login = () => {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<LoginFormData>({
+    mode: 'onChange',
+    resolver: zodResolver(loginSchema),
+  });
+
+  const handleLoginFormSubmit = (data: LoginFormData) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -16,23 +28,26 @@ export const Login = () => {
         <h1>Welcome to Todo application</h1>
         <p>Login to your account</p>
       </div>
-      <div className={publicStyles.formWrapper}>
-        <Input
-          label="Email"
-          error=""
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
-          type="email"
+      <form
+        onSubmit={handleSubmit(handleLoginFormSubmit)}
+        className={publicStyles.formWrapper}
+      >
+        <FormInput
+          name={loginFormFields.email}
+          register={register}
+          label={'Email'}
+          error={errors[loginFormFields.email]}
+          type={'email'}
         />
-        <Input
-          label="Password"
-          error=""
-          value={passwordValue}
-          onChange={(e) => setPasswordValue(e.target.value)}
-          type="password"
+        <FormInput
+          name={loginFormFields.password}
+          register={register}
+          label={'Password'}
+          error={errors[loginFormFields.password]}
+          type={'password'}
         />
-        <Button onClick={() => console.log('test')}>Log In</Button>
-      </div>
+        <Button>Log In</Button>
+      </form>
       <div className={publicStyles.footerWrapper}>
         <p>Don't have an account?</p>
         <Link to={routes.register}>Register</Link>

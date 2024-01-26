@@ -1,46 +1,83 @@
-import { useState } from 'react';
-import { Input } from '../../../components/ui/input/Input';
+import { FormInput } from '../../../components/ui/input/FormInput';
 import publicStyles from '../../../shared/styles/public-styles/publicStyles.module.css';
 import { Button } from '../../../components/ui/button/Button';
 import { Link } from 'react-router-dom';
 import { routes } from '../../../router/routes';
+import {
+  RegisterFormData,
+  registerFormFields,
+  registerSchema,
+} from './registartionSchema';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 
 export const Registration = () => {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setError,
+    clearErrors,
+    watch,
+  } = useForm<RegisterFormData>({
+    mode: 'onChange',
+    resolver: zodResolver(registerSchema),
+  });
+
+  const { password, confirmPassword } = watch();
+
+  const handleRegisterFormSubmit = (data: RegisterFormData) => {
+    console.log(data);
+  };
+
+  useEffect(() => {
+    if (password?.length > 4 && confirmPassword?.length > 4) {
+      if (password !== confirmPassword) {
+        setError(registerFormFields.password, {
+          message: 'Password and confirm password must be the same',
+        });
+      } else {
+        clearErrors(registerFormFields.password);
+      }
+    }
+  }, [password, confirmPassword, clearErrors, setError]);
 
   return (
     <div>
       <h1>Register to our application</h1>
-      <div className={publicStyles.formWrapper}>
-        <Input
+      <form
+        onSubmit={handleSubmit(handleRegisterFormSubmit)}
+        className={publicStyles.formWrapper}
+      >
+        <FormInput
+          name={registerFormFields.username}
+          register={register}
           label="Username"
-          error=""
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
+          error={errors[registerFormFields.username]}
         />
-        <Input
+        <FormInput
+          name={registerFormFields.email}
+          register={register}
           label="Email"
-          error=""
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
+          error={errors[registerFormFields.email]}
         />
-        <Input
+        <FormInput
+          name={registerFormFields.password}
+          register={register}
           label="Password"
-          error=""
-          value={passwordValue}
-          onChange={(e) => setPasswordValue(e.target.value)}
+          error={errors[registerFormFields.password]}
           type="password"
         />
-        <Input
+        <FormInput
+          name={registerFormFields.confirmPassword}
+          register={register}
           label="Confirm Password"
-          error=""
-          value={passwordValue}
-          onChange={(e) => setPasswordValue(e.target.value)}
+          error={errors[registerFormFields.confirmPassword]}
           type="password"
         />
-        <Button onClick={() => console.log('test')}>Register</Button>
-      </div>
+        <Button>Register</Button>
+      </form>
       <div className={publicStyles.footerWrapper}>
         <p>Already have an account?</p>
         <Link to={routes.auth}>Log In</Link>
