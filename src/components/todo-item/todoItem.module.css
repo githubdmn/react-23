@@ -1,0 +1,14 @@
+.itemWrapper {
+  position: relative;
+  background-color: rgb(225, 225, 225);
+  padding: 0.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.editIconContainer {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}

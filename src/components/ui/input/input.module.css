@@ -35,6 +35,10 @@
   border: 1px solid red;
 }
 
+.errorInputBorder:focus {
+  border-color: red;
+}
+
 .errorMessage {
   font-size: 0.875rem;
   color: red;

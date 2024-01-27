@@ -2,9 +2,8 @@ import { createContext, useContext, useState } from 'react';
 import { PropsWithChildren } from '../../shared/types/ChildrenComponent';
 
 type User = {
-  id: string;
+  id: number;
   email: string;
-  username: string;
 };
 
 type UserContext = {

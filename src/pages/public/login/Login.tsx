@@ -8,6 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/ui/input/FormInput';
 import { useUser } from '../../../store/user/UserContext';
+import { useMutation } from 'react-query';
+import { apiPublicClient } from '../../../api/axiosClient';
+import { apiEndpoints } from '../../../api/apiEndpoints';
+import { LoginResponse } from '../../../api/responses/LoginResponse';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -18,15 +22,27 @@ export const Login = () => {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm<LoginFormData>({
     mode: 'onChange',
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutate } = useMutation<LoginResponse, Error, LoginFormData>({
+    mutationFn: (data) => apiPublicClient.post(apiEndpoints.post.login, data),
+    onSuccess: (response) => {
+      setUser(response.data);
+      navigate(routes.root, { replace: true });
+    },
+    onError: () => {
+      setError(loginFormFields.email, { message: 'Wrong credentials!' });
+      setError(loginFormFields.password, { message: 'Wrong credentials!' });
+    },
+  });
+
   const handleLoginFormSubmit = (data: LoginFormData) => {
-    //TODO: update with the backend request and set back response as a user + set tokens
-    setUser({ id: '1', username: 'Test', email: data.email });
-    navigate(routes.root, { replace: true });
+    mutate(data);
+    // setUser({ id: '1', username: 'Test', email: data.email });
   };
 
   return (
