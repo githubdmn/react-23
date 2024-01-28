@@ -5,6 +5,15 @@
   color: white;
 }
 
+.button:disabled {
+  background-color: #c4c4c4;
+}
+
+.button:disabled:hover {
+  background-color: #c4c4c4;
+  cursor: auto;
+}
+
 .primaryButton {
   background-color: #2f4f4f;
   padding: 1rem;

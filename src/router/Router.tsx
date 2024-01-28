@@ -13,7 +13,7 @@ import { ProtectedRoute } from '../components/protected-route/ProtectedRoute';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
+    <Route>
       <Route path={routes.auth} element={<PublicLayout />}>
         <Route index element={<Login />} />
         <Route path={routes.register} element={<Registration />} />
@@ -28,6 +28,6 @@ export const router = createBrowserRouter(
       >
         <Route index element={<Home />} />
       </Route>
-    </>
+    </Route>
   )
 );

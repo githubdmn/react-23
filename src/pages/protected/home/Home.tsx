@@ -1,47 +1,103 @@
-import { Button } from '../../../components/ui/button/Button';
 import { useUser } from '../../../store/user/UserContext';
 import styles from './home.module.css';
-import { mockedTodoList } from './mockedTodoList';
+import protectedStyles from '../../../shared/styles/protected-styles/protectedStyles.module.css';
 import { TodoList } from '../../../components/todo-item-list/TodoItemList';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getQueryKey } from '../../../shared/helpers/getQueryKey';
 import { ApiResource } from '../../../enums/apiResource';
-import { apiProtectedClient } from '../../../api/axiosClient';
+import { apiClient } from '../../../api/axiosClient';
 import { apiEndpoints } from '../../../api/apiEndpoints';
 import { useState } from 'react';
 import { Popup } from '../../../components/ui/popup/Popup';
+import { FormInput } from '../../../components/ui/input/FormInput';
+import { useForm } from 'react-hook-form';
+import {
+  AddItemFormData,
+  addItemFormFields,
+  addItemSchema,
+} from '../../../shared/schemas/addListSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '../../../components/ui/button/Button';
+import { AxiosResponse } from 'axios';
+import { AddListRequest } from '../../../api/requestes/AddListRequest';
+import { ClipLoader } from 'react-spinners';
+import { TodoListsResponse } from '../../../api/responses/TodoListsResponse';
 
 export const Home = () => {
+  const queryClient = useQueryClient();
+
   const [isAddListPopupOpen, setIsAddListPopupOpen] = useState<boolean>(false);
 
-  const { clearUser, user } = useUser();
+  const { user } = useUser();
 
-  const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: getQueryKey(ApiResource.TODO_LIST, user!.id),
-    queryFn: () =>
-      apiProtectedClient.get(apiEndpoints.get.lists, {
-        headers: {
-          access_token: '?',
-        },
-      }),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<AddItemFormData>({
+    mode: 'onChange',
+    resolver: zodResolver(addItemSchema),
+  });
+
+  const {
+    data: todoLists,
+    isLoading: isLoadingLists,
+    isError: isErrorLists,
+    refetch,
+  } = useQuery<AxiosResponse<TodoListsResponse[]>>({
+    queryKey: getQueryKey(ApiResource.TODO_LISTS, user!.id),
+    queryFn: () => apiClient.get(apiEndpoints.get.lists),
+  });
+
+  const { mutate, isLoading: isLoadingAddList } = useMutation<
+    AxiosResponse,
+    Error,
+    AddListRequest
+  >({
+    mutationFn: (data) => apiClient.post(apiEndpoints.post.createList, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(
+        getQueryKey(ApiResource.TODO_LISTS, user!.id)
+      );
+      toggleAddListPopup();
+      setValue(addItemFormFields.title, '');
+    },
   });
 
   const toggleAddListPopup = () => {
     setIsAddListPopupOpen((prevState) => !prevState);
   };
 
+  const handleAddNewList = ({ title }: AddItemFormData) => {
+    mutate({ title, userId: user!.id.toString() });
+  };
+
+  if (isLoadingLists) return <ClipLoader />;
+
+  if (isErrorLists || !todoLists)
+    return <Button onClick={refetch}>Refetch!</Button>;
+
   return (
     <>
       {isAddListPopupOpen && (
         <Popup onOutsideClick={toggleAddListPopup}>
-          <></>
+          <form
+            className={protectedStyles.addItemFormWrapper}
+            onSubmit={handleSubmit(handleAddNewList)}
+          >
+            <FormInput
+              name={addItemFormFields.title}
+              label="Title"
+              register={register}
+              error={errors[addItemFormFields.title]}
+            />
+            <Button isLoading={isLoadingAddList}>Add</Button>
+          </form>
         </Popup>
       )}
       <main>
-        <h1>Welcome back {user!.id}</h1>
-        <div className={styles.logOutButtonWrapper}>
-          <Button onClick={clearUser}>Log out</Button>
-        </div>
+        <h1>Welcome back {user?.id}</h1>
         <div className={styles.listContainer}>
           <div className={styles.listTitleWrapper}>
             <p className={styles.listTitle}>Your Todo list:</p>
@@ -50,12 +106,8 @@ export const Home = () => {
             </div>
           </div>
           <div className={styles.listItemsWrapper}>
-            {mockedTodoList.map((todoItem) => (
-              <TodoList
-                key={todoItem.title}
-                title={todoItem.title}
-                items={todoItem.items}
-              />
+            {todoLists.data.map(({ title, listId }) => (
+              <TodoList key={title} title={title} listId={listId} />
             ))}
           </div>
         </div>

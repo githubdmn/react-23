@@ -9,9 +9,16 @@ import { useForm } from 'react-hook-form';
 import { FormInput } from '../../../components/ui/input/FormInput';
 import { useUser } from '../../../store/user/UserContext';
 import { useMutation } from 'react-query';
-import { apiPublicClient } from '../../../api/axiosClient';
 import { apiEndpoints } from '../../../api/apiEndpoints';
 import { LoginResponse } from '../../../api/responses/LoginResponse';
+import {
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  setAccessToken,
+  setRefreshToken,
+} from '../../../api/tokenHelpers';
+import { AxiosHeaders, AxiosResponse } from 'axios';
+import { apiClient } from '../../../api/axiosClient';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +27,7 @@ export const Login = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     setError,
   } = useForm<LoginFormData>({
@@ -28,10 +35,19 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { mutate } = useMutation<LoginResponse, Error, LoginFormData>({
-    mutationFn: (data) => apiPublicClient.post(apiEndpoints.post.login, data),
-    onSuccess: (response) => {
-      setUser(response.data);
+  const { mutate, isLoading } = useMutation<
+    AxiosResponse<LoginResponse>,
+    Error,
+    LoginFormData
+  >({
+    mutationFn: (data) => apiClient.post(apiEndpoints.post.login, data),
+    onSuccess: ({ data, headers = new Headers() }) => {
+      if (headers instanceof AxiosHeaders) {
+        setAccessToken(headers.get(ACCESS_TOKEN_KEY) as string);
+        setRefreshToken(headers.get(REFRESH_TOKEN_KEY) as string);
+      }
+
+      setUser(data);
       navigate(routes.root, { replace: true });
     },
     onError: () => {
@@ -40,9 +56,8 @@ export const Login = () => {
     },
   });
 
-  const handleLoginFormSubmit = (data: LoginFormData) => {
+  const handleLoginFormSubmit = async (data: LoginFormData) => {
     mutate(data);
-    // setUser({ id: '1', username: 'Test', email: data.email });
   };
 
   return (
@@ -69,7 +84,9 @@ export const Login = () => {
           error={errors[loginFormFields.password]}
           type={'password'}
         />
-        <Button>Log In</Button>
+        <Button isLoading={isLoading} isDisabled={!isValid}>
+          Log In
+        </Button>
       </form>
       <div className={publicStyles.footerWrapper}>
         <p>Don't have an account?</p>

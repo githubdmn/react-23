@@ -3,7 +3,7 @@ export const apiEndpoints = {
     logout: '/user/logout',
     refreshToken: '/user/refresh-token',
     lists: '/todo/lists',
-    list: '/todo/list',
+    list: (listId: string) => `/todo/list/${listId}`,
   },
   post: {
     login: '/user/login',

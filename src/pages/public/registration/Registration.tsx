@@ -1,3 +1,4 @@
+import styles from './registration.module.css';
 import { FormInput } from '../../../components/ui/input/FormInput';
 import publicStyles from '../../../shared/styles/public-styles/publicStyles.module.css';
 import { Button } from '../../../components/ui/button/Button';
@@ -11,17 +12,23 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
+import { useMutation } from 'react-query';
+import { AxiosResponse } from 'axios';
+import { RegisterResponse } from '../../../api/responses/RegisterResponse';
+import { apiEndpoints } from '../../../api/apiEndpoints';
+import { apiClient } from '../../../api/axiosClient';
 
 export const Registration = () => {
   const navigate = useNavigate();
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid, isDirty },
     handleSubmit,
     setError,
     clearErrors,
     watch,
+    reset,
   } = useForm<RegisterFormData>({
     mode: 'onChange',
     resolver: zodResolver(registerSchema),
@@ -29,10 +36,22 @@ export const Registration = () => {
 
   const { password, confirmPassword } = watch();
 
-  const handleRegisterFormSubmit = (data: RegisterFormData) => {
-    //TODO: update with the backend POST request, send data to BE then redirect to Login
-    navigate(routes.auth);
-    console.log(data);
+  const { mutate, isLoading, isError } = useMutation<
+    AxiosResponse<RegisterResponse>,
+    Error,
+    Omit<RegisterFormData, 'confirmPassword'>
+  >({
+    mutationFn: (data) => apiClient.post(apiEndpoints.post.register, data),
+    onSuccess: () => {
+      navigate(routes.auth);
+    },
+    onError: () => {
+      reset({}, { keepValues: true });
+    },
+  });
+
+  const handleRegisterFormSubmit = ({ email, password }: RegisterFormData) => {
+    mutate({ email, password });
   };
 
   useEffect(() => {
@@ -55,12 +74,6 @@ export const Registration = () => {
         className={publicStyles.formWrapper}
       >
         <FormInput
-          name={registerFormFields.username}
-          register={register}
-          label="Username"
-          error={errors[registerFormFields.username]}
-        />
-        <FormInput
           name={registerFormFields.email}
           register={register}
           label="Email"
@@ -80,7 +93,14 @@ export const Registration = () => {
           error={errors[registerFormFields.confirmPassword]}
           type="password"
         />
-        <Button>Register</Button>
+        <Button isLoading={isLoading} isDisabled={!isValid}>
+          Register
+        </Button>
+        {isError && !isDirty && (
+          <div className={styles.errorWrapper}>
+            <p>Something went wrong, try again!</p>
+          </div>
+        )}
       </form>
       <div className={publicStyles.footerWrapper}>
         <p>Already have an account?</p>
