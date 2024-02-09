@@ -1,0 +1,16 @@
+.formWrapper {
+  max-width: 30rem;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerWrapper {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

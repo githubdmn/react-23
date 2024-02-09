@@ -1,0 +1,21 @@
+.itemWrapper {
+  position: relative;
+  background-color: rgb(225, 225, 225);
+  padding: 0.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.iconsContainer {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itemDone {
+  text-decoration: line-through;
+}

@@ -1,0 +1,18 @@
+.protectedLayoutContainer {
+  position: relative;
+  margin: 0 auto;
+  max-width: 64rem;
+  width: 100%;
+}
+
+.logOutButtonWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15rem;
+}
+
+.logoutLoaderWrapper {
+  display: flex;
+  justify-content: center;
+}

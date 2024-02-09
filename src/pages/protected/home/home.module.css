@@ -1,0 +1,27 @@
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.listTitleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addNewList {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.listTitle {
+  font-weight: 600;
+}
+
+.listItemsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

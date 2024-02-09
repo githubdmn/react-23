@@ -1,0 +1,45 @@
+.inputContainer {
+  text-align: left;
+  height: 5.25rem;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: text;
+}
+
+.input::placeholder {
+  font-size: 0.875rem;
+}
+
+.input:focus {
+  border-color: #000000;
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.09);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.09);
+}
+
+.defaultInputBorder {
+  border: 1px solid #808080;
+}
+
+.errorInputBorder {
+  border: 1px solid red;
+}
+
+.errorInputBorder:focus {
+  border-color: red;
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  color: red;
+}
