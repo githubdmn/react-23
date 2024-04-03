@@ -10,7 +10,7 @@ export const signUpSchema = z.object({
   email: z.string().email(),
   password: z
     .string()
-    .min(5, { message: 'Password must be at least 5 characters long!' }),
+    .min(8, { message: 'Password must be at least 8 characters long!' }),
 });
 
 export type SignUpData = z.infer<typeof signUpSchema>;

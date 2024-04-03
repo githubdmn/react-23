@@ -5,6 +5,7 @@ import {
   getAccessToken,
   getRefreshToken,
   removeAccessToken,
+  removeRefreshToken,
 } from './tokenHelpers';
 
 export const axiosInstance: AxiosInstance = axios.create({
@@ -16,7 +17,7 @@ axiosInstance.interceptors.request.use(
     const accessToken = getAccessToken();
     const refreshToken = getRefreshToken();
 
-    if (accessToken) {
+    if (accessToken && refreshToken) {
       config.headers.access = accessToken;
       config.headers.refresh = refreshToken;
     }
@@ -29,19 +30,13 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response;
-  },
-
+  (response: AxiosResponse) => response,
   (error) => {
-    if (error.response.status === 401) {
-      const refreshToken = getRefreshToken();
+    const status = error.response.status;
 
-      if (refreshToken) {
-        //TODO - get new access token with the refresh token
-      } else {
-        removeAccessToken();
-      }
+    if (status === 401) {
+      removeAccessToken();
+      removeRefreshToken();
     }
 
     return Promise.reject(error);

@@ -12,6 +12,7 @@ export const useGetUser = () => {
   const { data, isLoading, isError } = useQuery<AxiosResponse<UserResponse>>({
     queryKey: ApiResource.USER,
     queryFn: () => axiosInstance.get(endpoints.user),
+    enabled: !!accessToken,
   });
 
   return { data, isLoading, isError, accessToken };

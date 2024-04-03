@@ -27,17 +27,20 @@ export const SignUp = () => {
   const { mutate } = useMutation<SignUpResponse, unknown, SignUpData>({
     mutationFn: (data) =>
       axiosInstance.post(endpoints.signUp, {
-        username: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
         password: data.password,
       }),
-    onSuccess: ({ data: { accessToken, refreshToken } }) => {
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
+    onSuccess: (response) => {
+      setAccessToken(response.data.data.accessToken);
+      setRefreshToken(response.data.data.refreshToken);
       navigate(routes.root);
     },
   });
 
   function onSubmitHandler(data: SignUpData) {
+    console.log(data);
     mutate(data);
   }
 
