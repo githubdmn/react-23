@@ -10,7 +10,6 @@ import { SignUpResponse } from '../../api/responses/signUpResponse';
 import { endpoints } from '../../api/endpoints';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
-import { useUser } from '../../store/useUser';
 import { setAccessToken, setRefreshToken } from '../../api/tokenHelpers';
 
 export const SignUp = () => {
@@ -34,7 +33,6 @@ export const SignUp = () => {
     onSuccess: ({ data: { accessToken, refreshToken } }) => {
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
-      useUser.getState().setIsLogged(true);
       navigate(routes.root);
     },
   });

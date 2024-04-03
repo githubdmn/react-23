@@ -20,8 +20,8 @@ export const PublicRoute = ({ children }: PublicRouteProps) => {
     );
   }
 
-  if (!data) {
-    return <Navigate to={routes.signUp} />;
+  if (data) {
+    return <Navigate to={routes.root} />;
   }
 
   return <>{children}</>;

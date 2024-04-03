@@ -6,7 +6,6 @@ import {
   getRefreshToken,
   removeAccessToken,
 } from './tokenHelpers';
-import { useUser } from '../store/useUser';
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: environmentVariables.baseUrl,
@@ -15,10 +14,11 @@ export const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = getAccessToken();
+    const refreshToken = getRefreshToken();
 
     if (accessToken) {
       config.headers.access = accessToken;
-      config.headers.refresh = accessToken;
+      config.headers.refresh = refreshToken;
     }
     return config;
   },
@@ -40,7 +40,6 @@ axiosInstance.interceptors.response.use(
       if (refreshToken) {
         //TODO - get new access token with the refresh token
       } else {
-        useUser.getState().removeUser();
         removeAccessToken();
       }
     }

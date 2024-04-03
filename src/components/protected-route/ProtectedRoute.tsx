@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
 import { useGetUser } from '../../hooks/useGetUser/useGetUser';
 
 type ProtectedRouteProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
@@ -26,7 +26,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!data) {
-    return <Navigate to={routes.root} />;
+    return <Navigate to={routes.signUp} />;
   }
 
   return <>{children}</>;

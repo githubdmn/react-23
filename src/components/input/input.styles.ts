@@ -7,9 +7,18 @@ export const StyledInputContainer = styled.div`
 `;
 
 export const StyledInput = styled.input<{ $hasError: boolean }>`
-  border: 1px solid ${({ $hasError }) => ($hasError ? 'red' : 'black')};
+  border: 1px solid ${({ $hasError }) => ($hasError ? 'red' : 'gray')};
   padding: 0.5rem;
   border-radius: 0.25rem;
+  font-weight: 300;
+
+  &::placeholder {
+    color: black;
+  }
+
+  &:focus {
+    border-color: ${({ $hasError }) => ($hasError ? 'red' : 'black')};
+  }
 `;
 
 export const ErrorWrapper = styled.div`
