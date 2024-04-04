@@ -6,10 +6,8 @@ export type User = {
 
 export type SignUpResponse = {
   data: {
-    data: {
-      user: User;
-      accessToken: string;
-      refreshToken: string;
-    };
+    user: User;
+    accessToken: string;
+    refreshToken: string;
   };
 };

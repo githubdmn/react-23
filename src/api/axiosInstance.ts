@@ -7,6 +7,7 @@ import {
   removeAccessToken,
   removeRefreshToken,
 } from './tokenHelpers';
+import { useUserStore } from '../store/userStore';
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: environmentVariables.baseUrl,
@@ -30,11 +31,12 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => response.data,
   (error) => {
     const status = error.response.status;
 
     if (status === 401) {
+      useUserStore.getState().removeEmail();
       removeAccessToken();
       removeRefreshToken();
     }

@@ -10,7 +10,7 @@ type PublicRouteProps = {
 };
 
 export const PublicRoute = ({ children }: PublicRouteProps) => {
-  const { data, isLoading, accessToken } = useGetUser();
+  const { email, isLoading, accessToken } = useGetUser();
 
   if (isLoading && accessToken) {
     return (
@@ -20,7 +20,7 @@ export const PublicRoute = ({ children }: PublicRouteProps) => {
     );
   }
 
-  if (data) {
+  if (email) {
     return <Navigate to={routes.root} />;
   }
 

@@ -11,9 +11,12 @@ import { endpoints } from '../../api/endpoints';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { setAccessToken, setRefreshToken } from '../../api/tokenHelpers';
+import { useUserStore } from '../../store/userStore';
 
 export const SignUp = () => {
   const navigate = useNavigate();
+
+  const { setEmail } = useUserStore();
 
   const {
     handleSubmit,
@@ -32,15 +35,15 @@ export const SignUp = () => {
         email: data.email,
         password: data.password,
       }),
-    onSuccess: (response) => {
-      setAccessToken(response.data.data.accessToken);
-      setRefreshToken(response.data.data.refreshToken);
+    onSuccess: ({ data }) => {
+      setEmail(data.user.email);
+      setAccessToken(data.accessToken);
+      setRefreshToken(data.refreshToken);
       navigate(routes.root);
     },
   });
 
   function onSubmitHandler(data: SignUpData) {
-    console.log(data);
     mutate(data);
   }
 

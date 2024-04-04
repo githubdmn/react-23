@@ -1,19 +1,22 @@
-import { useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { endpoints } from '../../api/endpoints';
-import { ApiResource } from '../../enums/apiResource';
 import { axiosInstance } from '../../api/axiosInstance';
 import { getAccessToken } from '../../api/tokenHelpers';
-import { AxiosResponse } from 'axios';
 import { UserResponse } from '../../api/responses/userResponse';
+import { useUserStore } from '../../store/userStore';
+import { useEffect } from 'react';
 
 export const useGetUser = () => {
+  const { email } = useUserStore();
   const accessToken = getAccessToken();
 
-  const { data, isLoading, isError } = useQuery<AxiosResponse<UserResponse>>({
-    queryKey: ApiResource.USER,
-    queryFn: () => axiosInstance.get(endpoints.user),
-    enabled: !!accessToken,
+  const { data, mutate, isError, isLoading } = useMutation<UserResponse>({
+    mutationFn: () => axiosInstance.post(endpoints.user, { email }),
   });
 
-  return { data, isLoading, isError, accessToken };
+  useEffect(() => {
+    if (email && !data) mutate();
+  }, [email, mutate, data]);
+
+  return { data, isLoading, isError, accessToken, mutate, email };
 };

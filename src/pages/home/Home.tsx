@@ -1,9 +1,23 @@
-import { Heading, Spinner } from '../../components';
+import { useEffect } from 'react';
+import { Button, Heading, Spinner } from '../../components';
 import { useGetUser } from '../../hooks/useGetUser/useGetUser';
 import { SpinnerWrapper } from '../../shared/styles/spinnerWrapper.styles';
+import { useUserStore } from '../../store/userStore';
+import { removeAccessToken, removeRefreshToken } from '../../api/tokenHelpers';
 
 export const Home = () => {
-  const { data, isLoading, isError } = useGetUser();
+  const { removeEmail } = useUserStore();
+  const { data, isLoading, isError, mutate } = useGetUser();
+
+  useEffect(() => {
+    mutate();
+  }, [mutate]);
+
+  const handleLogoutClick = () => {
+    removeEmail();
+    removeAccessToken();
+    removeRefreshToken();
+  };
 
   if (isLoading) {
     return (
@@ -17,9 +31,11 @@ export const Home = () => {
     return <Heading>Request failed!</Heading>;
   }
 
-  return (
-    <>
-      <Heading>{data!.data.message}</Heading>
-    </>
-  );
+  if (data)
+    return (
+      <>
+        <Heading>{data?.message}</Heading>
+        <Button onClick={handleLogoutClick}>Logout</Button>
+      </>
+    );
 };

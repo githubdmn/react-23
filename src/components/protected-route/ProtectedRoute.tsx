@@ -1,17 +1,12 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import { routes } from '../../router/routes';
 import { SpinnerWrapper } from '../../shared/styles/spinnerWrapper.styles';
 import { Spinner } from '..';
-import { ReactNode } from 'react';
 import { useGetUser } from '../../hooks/useGetUser/useGetUser';
 
-type ProtectedRouteProps = {
-  children?: ReactNode;
-};
-
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { data, isLoading, accessToken } = useGetUser();
+export const ProtectedRoute = () => {
+  const { email, isLoading, accessToken } = useGetUser();
 
   if (!accessToken) {
     return <Navigate to={routes.signUp} />;
@@ -25,9 +20,9 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     );
   }
 
-  if (!data) {
+  if (!email) {
     return <Navigate to={routes.signUp} />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };
