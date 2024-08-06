@@ -1,7 +1,8 @@
-import { FeedbackList, FeedbackStats, Header } from './components';
+import { FeedbackForm, FeedbackList, FeedbackStats, Header } from './components';
 import { feedback as feedbackJSON } from '../db.json';
 import { useState } from 'react';
 import { FeedbackProps } from './types';
+import { customAlphabet } from 'nanoid';
 
 function App() {
   const FeedbackData = JSON.parse(JSON.stringify(feedbackJSON));
@@ -14,11 +15,17 @@ function App() {
     }
   };
 
+  const addFeedback = (newFeedback: FeedbackProps) => {
+    newFeedback.id = +customAlphabet(`1234567890`, 5)();
+    setFeedback([newFeedback, ...feedback]);
+  };
+
   return (
     <>
       <Header title="This is optional" />
 
       <div className="container">
+        <FeedbackForm handleAdd={addFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
       </div>
