@@ -22,7 +22,7 @@ function FeedbackList(prop: FeedbackListProps) {
             //   handleDelete={() => {
             //     console.log(item.id);
             //   }}
-            handleDelete={prop.handleDelete}
+            handleDelete={(id: number) => prop.handleDelete?.(id)}
           />
         ))}
       </div>
