@@ -1,8 +1,17 @@
-import { FeedbackForm, FeedbackList, FeedbackStats, Header } from './components';
+import {
+  AboutLinkIcon,
+  FeedbackForm,
+  FeedbackList,
+  FeedbackStats,
+  Header,
+  Post,
+} from './components';
 import { feedback as feedbackJSON } from '../db.json';
 import { useState } from 'react';
 import { FeedbackProps } from './types';
 import { customAlphabet } from 'nanoid';
+import { AboutPage } from './pages';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const FeedbackData = JSON.parse(JSON.stringify(feedbackJSON));
@@ -21,15 +30,30 @@ function App() {
   };
 
   return (
-    <>
+    <BrowserRouter>
       <Header title="This is optional" />
-
       <div className="container">
-        <FeedbackForm handleAdd={addFeedback} />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <FeedbackForm handleAdd={addFeedback} />
+                <FeedbackStats feedback={feedback} />
+                <FeedbackList
+                  feedback={feedback}
+                  handleDelete={deleteFeedback}
+                />
+              </>
+            }
+          />
+
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/post/*" element={<Post />} /> // /post /post/:id /post/:id/:name /post/*
+        </Routes>
+        <AboutLinkIcon />
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 
