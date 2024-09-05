@@ -1,19 +1,21 @@
-import { FeedbackProps } from '@/types';
+
 import Card from './Card';
 import { FaTimes } from 'react-icons/fa';
+import { useContext } from 'react';
+import { FeedbackItemType } from '@/types';
+import { FeedbackContext } from '../context';
 
-function FeedbackItem(props: FeedbackProps) {
+function FeedbackItem(prop: FeedbackItemType) {
+
+  const { deleteFeedbackItem } = useContext(FeedbackContext);
 
   return (
-    // Passing children: The children (React.ReactNode) prop is implicitly passed
-    // when you include JSX elements within a component's tags.
-    // In this case, the div elements are passed as children to the Card component.
     <Card>
-      <div className="num-display">{props.rating}</div>
-      <button className="close" onClick={() => props.handleDelete(props.id)}>
+      <div className="num-display">{prop.rating}</div>
+      <button className="close" onClick={() => deleteFeedbackItem(prop.id)}>
         <FaTimes color="purple" />
       </button>
-      <div className="text-display">{props.text}</div>
+      <div className="text-display">{prop.text}</div>
     </Card>
   );
 }
