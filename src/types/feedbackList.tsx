@@ -1,7 +1,4 @@
-import { FeedbackProps } from "./feedback";
+import { FeedbackItemType } from "./feedbackItem";
 
 
-export type FeedbackListProps = {
-  feedback: FeedbackProps[];
-  handleDelete?: (id: number) => void;
-};
+export type FeedbackList = FeedbackItemType[];

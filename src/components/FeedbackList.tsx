@@ -1,8 +1,16 @@
-import { FeedbackListProps } from '@/types';
+import { FeedbackItemType } from '@/types';
+import { useContext } from 'react';
+import { FeedbackContext } from '../context';
 import FeedbackItem from './FeedbackItem';
 
-function FeedbackList(prop: FeedbackListProps) {
-  if (prop.feedback.length === 0) {
+
+
+function FeedbackList() {
+
+  const { feedbackList } = useContext(FeedbackContext);
+  
+
+  if (feedbackList.length === 0) {
     return (
       <>
         <p>No feedback yet</p>
@@ -13,17 +21,8 @@ function FeedbackList(prop: FeedbackListProps) {
   return (
     <>
       <div className="feedback-list">
-        {prop.feedback.map((item) => (
-          // Key Prop: The key prop is specified in the parent component (FeedbackList) and
-          //is used by React for optimizing rendering. It should be unique among siblings.
-          <FeedbackItem
-            key={item.id}
-            {...item}
-            //   handleDelete={() => {
-            //     console.log(item.id);
-            //   }}
-            handleDelete={(id: number) => prop.handleDelete?.(id)}
-          />
+        {feedbackList.map((item: FeedbackItemType) => (
+          <FeedbackItem key={item.id} {...item} />
         ))}
       </div>
     </>

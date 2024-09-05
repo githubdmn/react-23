@@ -1,8 +1,8 @@
-import { FeedbackProps } from "./feedback";
+import { FeedbackItemType } from "./feedbackItem";
 
 
 type FeedbackFormProps = {
-  handleAdd: (newFeedback: FeedbackProps) => void;
+  handleAdd: (newFeedback: FeedbackItemType) => void;
 };
 
 export default FeedbackFormProps;

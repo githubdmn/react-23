@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Card from './Card';
 import Button from './Button';
 import RatingSelect from './RatingSelect';
-import FeedbackFormProps from '@/types/feedbackForm';
-import { FeedbackProps } from '@/types';
+import { FeedbackItemType } from '@/types';
+import { FeedbackContext } from '../context';
 
-function FeedbackForm(props: FeedbackFormProps) {
+function FeedbackForm() {
   const [text, setText] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(10);
+  const {  addFeedbackItem } = useContext(FeedbackContext);
 
   const handleTextOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (text === '') {
@@ -28,13 +29,12 @@ function FeedbackForm(props: FeedbackFormProps) {
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (text.trim().length > 10) {
-      const newFeedback: FeedbackProps = {
+      const newFeedback: FeedbackItemType = {
         id: 0,
         text,
         rating,
-        handleDelete: () => {},
       };
-      props.handleAdd(newFeedback);
+      addFeedbackItem(newFeedback);
       setText('');
     }
   };
