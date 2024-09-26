@@ -1,4 +1,4 @@
-import RatingProps from '@/types/rating';
+import RatingProps from '@/FeedbackApp/types/rating';
 import { useState } from 'react';
 
 function RatingSelect(props: RatingProps) {

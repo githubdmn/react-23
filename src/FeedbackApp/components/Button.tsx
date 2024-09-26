@@ -1,4 +1,4 @@
-import { ButtonProps } from '@/types';
+import { ButtonProps } from '@/FeedbackApp/types';
 
 function Button(props: ButtonProps) {
   return (

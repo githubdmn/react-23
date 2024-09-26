@@ -1,5 +1,5 @@
 
-import { HeaderProps } from "@/types";
+import { HeaderProps } from "@/FeedbackApp/types";
 
 const defaultProps: HeaderProps = {
 	title: 'Default Title',

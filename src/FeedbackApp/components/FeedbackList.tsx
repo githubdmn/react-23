@@ -1,21 +1,26 @@
-import { FeedbackItemType } from '@/types';
+import { FeedbackItemType } from '@/FeedbackApp/types';
 import { useContext } from 'react';
 import { FeedbackContext } from '../context';
 import FeedbackItem from './FeedbackItem';
+import { Spinner } from '../shared';
 
 
 
 function FeedbackList() {
 
-  const { feedbackList } = useContext(FeedbackContext);
+  const { feedbackList, isLoading } = useContext(FeedbackContext);
   
 
-  if (feedbackList.length === 0) {
+  if (!isLoading && feedbackList.length === 0) {
     return (
       <>
         <p>No feedback yet</p>
       </>
     );
+  }
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (

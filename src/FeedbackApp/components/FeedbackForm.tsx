@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import Card from './Card';
 import Button from './Button';
 import RatingSelect from './RatingSelect';
-import { FeedbackItemType } from '@/types';
+import { FeedbackItemType } from '@/FeedbackApp/types';
 import { FeedbackContext } from '../context';
 
 function FeedbackForm() {
@@ -10,7 +10,7 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(10);
-  const {  addFeedbackItem } = useContext(FeedbackContext);
+  const { addFeedbackItem } = useContext(FeedbackContext);
 
   const handleTextOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (text === '') {
