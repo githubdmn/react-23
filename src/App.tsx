@@ -1,3 +1,4 @@
 import App01 from './FeedbackApp/App01';
+import App02 from './GithubFinderApp/App02';
 
-export default App01;
+export default App02;
