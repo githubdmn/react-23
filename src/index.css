@@ -228,3 +228,7 @@ input:focus {
     width: 80%;
   }
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
