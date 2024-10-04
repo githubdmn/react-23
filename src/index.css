@@ -1,3 +1,5 @@
+/* Feedback app css */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 * {
@@ -8,7 +10,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #202142;
+  background-color: #424374;
   color: #fff;
   line-height: 1.6;
 }
@@ -182,7 +184,7 @@ input:focus {
 .message {
   padding-top: 10px;
   text-align: center;
-  color: rebeccapurple;
+  color: rgb(125, 84, 167);
 }
 
 /* FIX: Remove position: absolute to keep about icon at the bottom of the
@@ -228,3 +230,7 @@ input:focus {
     width: 80%;
   }
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
