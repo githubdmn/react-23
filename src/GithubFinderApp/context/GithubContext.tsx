@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useReducer } from 'react';
 import UserType from '../types/UserType';
+import GithubReducer from './GithubReducer';
 
 const GithubContext = createContext<{
   users: UserType[];
@@ -11,15 +12,24 @@ const GithubContext = createContext<{
   fetchUsers: async () => {},
 });
 
-export const GithubContextProvider = ({ children }: { children: ReactNode }) => {
-  const [users, setUsers] = useState<UserType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+export const GithubContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const initialState = {
+    users: [],
+    isLoading: true,
+  };
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
+  const [state, dispatch] = useReducer(GithubReducer, initialState);
+
   const fetchUsers = async () => {
+    setLoading();
     const response = await fetch(
       `${import.meta.env.VITE_GITHUB_API_URL}/users`,
       {
@@ -30,12 +40,18 @@ export const GithubContextProvider = ({ children }: { children: ReactNode }) => 
       },
     );
     const data = await response.json();
-    setUsers(data);
-    setIsLoading(false);
+    dispatch({
+      type: 'GET_USERS',
+      payload: data,
+    });
   };
 
+  const setLoading = () => dispatch({ type: 'SET_LOADING' });
+
   return (
-    <GithubContext.Provider value={{ users, isLoading, fetchUsers }}>
+    <GithubContext.Provider
+      value={{ users: state.users, isLoading: state.isLoading, fetchUsers }}
+    >
       {children}
     </GithubContext.Provider>
   );
