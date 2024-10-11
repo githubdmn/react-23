@@ -27,7 +27,7 @@ function App01() {
     </div>
 =======
     <GithubContextProvider>
-      <BrowserRouter>
+      <BrowserRouter basename='/github-finder'>
         <div className="flex flex-col justify-between h-screen">
           <Navbar />
           <main className="container mx-auto px-3 pb-12">
