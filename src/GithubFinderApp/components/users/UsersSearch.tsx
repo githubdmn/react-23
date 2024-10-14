@@ -30,7 +30,7 @@ const UsersSearch = () => {
               />
               <button
                 type="submit"
-                className="absolute top-0 right-0 rounded-l-none w-36 h-full btn btn-lg"
+                className="absolute top-0 right-0 rounded-l-none w-24 h-full btn btn-lg bg-gray-600 text-white content-center text-center"
               >
                 Go
               </button>
