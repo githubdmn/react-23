@@ -12,7 +12,6 @@ function Navbar({ title = DefaultNavbarTitle }: NavbarProps) {
     <nav className="navbar mb-12 shadow-lg bg-neutral text-neutral-content py-4">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          
           <div className="flex items-center">
             <FaGithub className="inline pr-2 text-3xl" />
             <Link to="/" className="text-lg font-bold align-middle">
@@ -21,10 +20,16 @@ function Navbar({ title = DefaultNavbarTitle }: NavbarProps) {
           </div>
 
           <div className="flex">
-            <Link to="/" className="btn btn-ghost btn-sm rounded-btn">
+            <Link
+              to="/"
+              className="btn btn-ghost btn-sm rounded-btn content-center text-center"
+            >
               Home
             </Link>
-            <Link to="/about" className="btn btn-ghost btn-sm rounded-btn">
+            <Link
+              to="/about"
+              className="btn btn-ghost btn-sm rounded-btn content-center text-center"
+            >
               About
             </Link>
           </div>
