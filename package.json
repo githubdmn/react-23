@@ -10,7 +10,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server db.json --port 3001",
-    "start": "concurrently \"yarn run server\" \"yarn run dev\""
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "start-yarn": "concurrently \"yarn run server\" \"yarn run dev\""
   },
   "dependencies": {
     "nanoid": "^3.3.4",
