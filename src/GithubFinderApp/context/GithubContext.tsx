@@ -16,7 +16,7 @@ const GithubContext = createContext<{
   clearUsers: () => {},
 });
 
-export const GithubContextProvider = ({
+export const GithubProvider = ({
   children,
 }: {
   children: ReactNode;
