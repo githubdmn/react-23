@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import FeedbackApp from './FeedbackApp/App01';
-import GithubFinderApp from './GithubFinderApp/App02';
+import FeedbackApp from './FeedbackApp/App';
+import GithubFinderApp from './GithubFinderApp/App';
 
 export default function App() {
   return (

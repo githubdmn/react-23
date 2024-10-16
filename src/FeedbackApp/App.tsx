@@ -9,7 +9,7 @@ import { AboutPage } from './pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { FeedbackProvider } from './context';
 
-function App01() {
+function App() {
   return (
     <FeedbackProvider>
       <BrowserRouter basename='/feedback'>
@@ -35,4 +35,4 @@ function App01() {
   );
 }
 
-export default App01;
+export default App;
