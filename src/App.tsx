@@ -5,6 +5,7 @@ import GithubFinderApp from './GithubFinderApp/App02';
 export default function App() {
   return (
     <>
+      <FeedbackApp />
       <GithubFinderApp />
     </>
   );
