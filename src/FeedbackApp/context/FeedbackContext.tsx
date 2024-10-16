@@ -27,9 +27,14 @@ export const FeedbackProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const feedbackData = await getFeedback();
-      setFeedbackList(feedbackData);
-      setIsLoading(false);
+      try {
+        const feedbackData = await getFeedback();
+        setFeedbackList(feedbackData);
+      } catch (error) {
+        console.error('Failed to fetch feedback:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
@@ -37,20 +42,44 @@ export const FeedbackProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteFeedbackItem = async (id: number) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      await deleteFeedback(id);
+      try {
+        await deleteFeedback(id);
+        // Optimistically update the state after deletion
+        setFeedbackList((prevFeedbackList) =>
+          prevFeedbackList.filter((item) => item.id !== id),
+        );
+      } catch (error) {
+        console.error('Failed to delete feedback:', error);
+      }
     }
   };
 
-  const addFeedbackItem = (newFeedback: FeedbackItemType) => {
-    newFeedback.id = +customAlphabet(`1234567890`, 5)();
-    addFeedback(newFeedback);
+  const addFeedbackItem = async (newFeedback: FeedbackItemType) => {
+    try {
+      newFeedback.id = +customAlphabet(`1234567890`, 5)();
+      await addFeedback(newFeedback);
+      // Optimistically add to state after successful add
+      setFeedbackList((prevFeedbackList) => [newFeedback, ...prevFeedbackList]);
+    } catch (error) {
+      console.error('Failed to add feedback:', error);
+    }
   };
 
-  const updateFeedbackItem = (
+  const updateFeedbackItem = async (
     id: number,
     updatedFeedback: FeedbackItemType,
-  ) => {    
-    updateFeedback(id, updatedFeedback);
+  ) => {
+    try {
+      await updateFeedback(id, updatedFeedback);
+      // Optimistically update the feedback list
+      setFeedbackList((prevFeedbackList) =>
+        prevFeedbackList.map((item) =>
+          item.id === id ? { ...item, ...updatedFeedback } : item,
+        ),
+      );
+    } catch (error) {
+      console.error('Failed to update feedback:', error);
+    }
   };
 
   return (

@@ -38,15 +38,18 @@ async function deleteFeedback(id: number) {
 }
 
 async function updateFeedback(id: number, updatedFeedback: FeedbackItemType) {
-  const response = await fetch(feedbackApi + '/' + id, {
+  const response = await fetch(`${feedbackApi}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(updatedFeedback),
   });
-  console.log(await response.json()); 
-  
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status} - ${response.statusText}`);
+  }
+
   return await response.json();
 }
 
