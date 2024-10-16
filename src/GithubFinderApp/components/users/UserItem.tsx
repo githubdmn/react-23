@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import UserType from '../../types/UserType';
 
 function UserItem(user: UserType) {
@@ -13,6 +14,9 @@ function UserItem(user: UserType) {
               <div>
                 <div className="font-bold">{user.login}</div>
                 <div className="text-sm opacity-50">{user.login}</div>
+                <Link to={`/user/${user.login}`} className="btn btn-primary btn-sm">
+                  View Profile
+                  </Link>
               </div>
             </div>
           </div>

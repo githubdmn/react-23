@@ -13,6 +13,12 @@ const GithubReducer = (state: any, action: { type: string; payload?: any }) => {
         ...state,
         isLoading: true,
       };
+    case 'GET_USER':
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
     case 'CLEAR_USERS':
       return {
         ...state,

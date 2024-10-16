@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Alert, Footer, Navbar } from './components';
-import { Home, About, NotFound } from './pages';
-import {  GithubProvider, AlertProvider } from './context';
+import { Home, About, NotFound, User } from './pages';
+import { GithubProvider, AlertProvider } from './context';
 function App() {
   return (
     <GithubProvider>
@@ -14,6 +14,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/user/:login" element={<User />} />
                 <Route path="/notfound" element={<NotFound />} />
                 <Route path="/*" element={<NotFound />} />
               </Routes>
@@ -25,5 +26,4 @@ function App() {
     </GithubProvider>
   );
 }
-
 export default App;
