@@ -17,6 +17,14 @@ type UserType = {
   subscriptions_url: string;
   type: string;
   url: string;
+  name: string;
+  location: string;
+  bio: string;
+  company: string;
+  blog: string;
+  followers: number;
+  following: number;
+  public_repos: number;
+  public_gists: number;
 };
-
 export default UserType;
