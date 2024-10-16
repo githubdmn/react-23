@@ -2,22 +2,22 @@
   "feedback": [
     {
       "id": "2",
-      "rating": 8,
-      "text": "This is feedback item 2 coming from the backend"
+      "text": "This is feedback item 2 coming from the backend!!!",
+      "rating": 8
     },
     {
-      "id": 0,
-      "text": "This is good 5.1",
+      "id": "0",
+      "text": "This is good 5.1 223",
       "rating": 6
     },
     {
-      "id": 92160,
+      "id": "92160",
       "text": "Write a review",
       "rating": 6
     },
     {
-      "id": 68550,
-      "text": "This is four",
+      "id": "68550",
+      "text": "This is four 4",
       "rating": 4
     }
   ]
