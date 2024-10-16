@@ -1,10 +1,13 @@
-import GithubContext, { GithubContextProvider } from "./GithubContext";
-import GithubReducer from "./GithubReducer";
-
-
+import AlertContext, { AlertProvider } from './AlertContext';
+import GithubContext, { GithubProvider } from './GithubContext';
+import GithubReducer from './GithubReducer';
+import AlertReducer from './AlertReducer';
 
 export {
-	GithubContext,
-	GithubContextProvider,
-	GithubReducer,
-}
+  GithubContext,
+  GithubProvider,
+  GithubReducer,
+  AlertContext,
+  AlertProvider,
+  AlertReducer,
+};
