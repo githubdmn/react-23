@@ -10,9 +10,7 @@ async function getFeedback() {
     headers: {
       'Content-Type': 'application/json',
     },
-  });
-  console.log(response);
-  
+  });  
   return response.json();
 }
 
