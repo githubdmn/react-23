@@ -1,5 +1,6 @@
 import AlertContext, { AlertProvider } from './AlertContext';
 import GithubContext, { GithubProvider } from './GithubContext';
+import { fetchUsers, getUser, searchUser } from './GithubActions';
 import GithubReducer from './GithubReducer';
 import AlertReducer from './AlertReducer';
 
@@ -10,4 +11,7 @@ export {
   AlertContext,
   AlertProvider,
   AlertReducer,
+  fetchUsers,
+  getUser,
+  searchUser,
 };
