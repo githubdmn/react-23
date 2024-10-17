@@ -1,6 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { TGithubAction, TGithubState } from "../types";
 
-const GithubReducer = (state: any, action: { type: string; payload?: any }) => {
+const GithubReducer = (
+  state: TGithubState,
+  action: TGithubAction,
+): TGithubState => {
   switch (action.type) {
     case 'GET_USERS':
       return {
@@ -28,4 +31,5 @@ const GithubReducer = (state: any, action: { type: string; payload?: any }) => {
       return state;
   }
 };
+
 export default GithubReducer;

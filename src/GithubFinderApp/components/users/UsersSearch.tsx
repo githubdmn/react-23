@@ -1,18 +1,22 @@
-import { AlertContext, GithubContext } from '../../context';
+import { AlertContext, GithubContext, searchUser } from '../../context';
 import { useContext, useState } from 'react';
 
 const UsersSearch = () => {
-  const { users, searchUser, clearUsers } = useContext(GithubContext);
+  const { users, dispatch } = useContext(GithubContext);
   const { setAlert } = useContext(AlertContext);
   const [text, setText] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setText(e.target.value);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (text === '') {
       setAlert('Please enter something', 'error');
     } else {
-      searchUser(text);
+      dispatch({ type: 'SET_LOADING' });
+      const users = await searchUser(text);
+      dispatch({ type: 'GET_USERS', payload: users });
       setText('');
     }
   };
@@ -42,7 +46,10 @@ const UsersSearch = () => {
 
       {users.length > 0 && (
         <div className="flex justify-end">
-          <button onClick={clearUsers} className="btn btn-ghost btn-lg">
+          <button
+            onClick={() => dispatch({ type: 'CLEAR_USERS' })}
+            className="btn btn-ghost btn-lg"
+          >
             Clear
           </button>
         </div>

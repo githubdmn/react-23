@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react';
-import { GithubContext } from '../context';
+import { GithubContext, getUser } from '../context';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../components';
 
 function User() {
-  const { user, getUser, isLoading } = useContext(GithubContext);
+  const { user, dispatch, isLoading } = useContext(GithubContext);
   const params = useParams();
 
   //   useEffect(() => {
@@ -16,11 +16,19 @@ function User() {
   // Add Dependency for useEffect: Since params.login is the parameter that triggers the fetch, you should include it in the dependency array to prevent any side effects if this component is reused with different users:
 
   useEffect(() => {
-    if (params.login) {
-      getUser(params.login);
-    }
+    dispatch({ type: 'SET_LOADING' });
+
+    const getUserData = async () => {
+      if (params.login) {
+        const userData = await getUser(params.login);
+        if (userData) {
+          dispatch({ type: 'GET_USER', payload: userData });
+        }
+      }
+    };
+    getUserData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.login]);
+  }, [dispatch, params.login]);
 
   if (isLoading) {
     return <Spinner />;
