@@ -1,5 +1,5 @@
 import Card from './Card';
-import { FaTimes, FaEdit, FaSave} from 'react-icons/fa';
+import { FaTimes, FaEdit, FaSave } from 'react-icons/fa';
 import { useContext, useState } from 'react';
 import { FeedbackItemType } from '@/FeedbackApp/types';
 import { FeedbackContext } from '../context';
@@ -49,7 +49,7 @@ function FeedbackItem(prop: FeedbackItemType) {
             onChange={(e) => setNewText(e.target.value)} // Update state on change
           />
           <button onClick={handleSave} className="btn-save">
-            <FaSave color='green'/>
+            <FaSave color="green" />
           </button>
         </div>
       ) : (

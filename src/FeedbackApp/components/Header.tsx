@@ -1,16 +1,14 @@
-
-import { HeaderProps } from "@/FeedbackApp/types";
+import { HeaderProps } from '@/FeedbackApp/types';
 
 const defaultProps: HeaderProps = {
-	title: 'Default Title',
-	color: 'pink',
-	backgroundColor: 'rgba(0,0,0,0.4)',
+  title: 'Default Title',
+  color: 'pink',
+  backgroundColor: 'rgba(0,0,0,0.4)',
 };
 
 export default function Header(props: Partial<HeaderProps>) {
-
-	const { title, color, backgroundColor } = { ...defaultProps, ...props };
-	/* If a property exists in both defaultProps and props, the value from props will overwrite the value from defaultProps due to the order in which they are spread. */
+  const { title, color, backgroundColor } = { ...defaultProps, ...props };
+  /* If a property exists in both defaultProps and props, the value from props will overwrite the value from defaultProps due to the order in which they are spread. */
 
   const headerStyles = {
     backgroundColor: backgroundColor,

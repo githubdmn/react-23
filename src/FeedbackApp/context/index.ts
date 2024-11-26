@@ -1,5 +1,3 @@
-
-import { FeedbackContext, FeedbackProvider } from "./FeedbackContext";
-
+import { FeedbackContext, FeedbackProvider } from './FeedbackContext';
 
 export { FeedbackContext, FeedbackProvider };

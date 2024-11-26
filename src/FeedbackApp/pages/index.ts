@@ -1,5 +1,3 @@
-
-
-import AboutPage from "./about";
+import AboutPage from './about';
 
 export { AboutPage };

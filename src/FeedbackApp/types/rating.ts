@@ -1,7 +1,5 @@
-
-
 type RatingProps = {
-	select: (rating: number) => void;
+  select: (rating: number) => void;
 };
 
 export default RatingProps;

@@ -14,9 +14,12 @@ function UserItem(user: UserType) {
               <div>
                 <div className="font-bold">{user.login}</div>
                 <div className="text-sm opacity-50">{user.login}</div>
-                <Link to={`/user/${user.login}`} className="btn btn-primary btn-sm">
+                <Link
+                  to={`/user/${user.login}`}
+                  className="btn btn-primary btn-sm"
+                >
                   View Profile
-                  </Link>
+                </Link>
               </div>
             </div>
           </div>
@@ -25,4 +28,5 @@ function UserItem(user: UserType) {
     </div>
   );
 }
+
 export default UserItem;

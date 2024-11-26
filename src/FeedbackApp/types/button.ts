@@ -1,5 +1,3 @@
-
-
 export type ButtonProps = {
   children: React.ReactNode;
   version?: string;

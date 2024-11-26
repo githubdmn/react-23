@@ -1,10 +1,10 @@
-import { CardProps } from "@/FeedbackApp/types/card";
+import { CardProps } from '@/FeedbackApp/types/card';
 
-// Passing children: The children (React.ReactNode) prop is implicitly passed 
-// when you include JSX elements within a component's tags. 
+// Passing children: The children (React.ReactNode) prop is implicitly passed
+// when you include JSX elements within a component's tags.
 // In this case, the div elements are passed as children to the Card component.
 
-function Card({children, reverse }: CardProps) {
+function Card({ children, reverse }: CardProps) {
   return (
     <div
       className="card"

@@ -1,4 +1,3 @@
-import { FeedbackItemType } from "./feedbackItem";
-
+import { FeedbackItemType } from './feedbackItem';
 
 export type FeedbackList = FeedbackItemType[];

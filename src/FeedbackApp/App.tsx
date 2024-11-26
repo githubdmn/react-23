@@ -12,7 +12,7 @@ import { FeedbackProvider } from './context';
 function App() {
   return (
     <FeedbackProvider>
-      <BrowserRouter basename='/feedback'>
+      <BrowserRouter basename="/feedback">
         <Header title="This is optional" />
         <div className="container">
           <Routes>

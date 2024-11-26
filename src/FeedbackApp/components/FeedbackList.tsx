@@ -4,12 +4,8 @@ import { FeedbackContext } from '../context';
 import FeedbackItem from './FeedbackItem';
 import { Spinner } from '../shared';
 
-
-
 function FeedbackList() {
-
   const { feedbackList, isLoading } = useContext(FeedbackContext);
-  
 
   if (!isLoading && feedbackList.length === 0) {
     return (

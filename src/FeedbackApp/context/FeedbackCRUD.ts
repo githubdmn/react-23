@@ -1,4 +1,4 @@
-import { FeedbackItemType } from "../types";
+import { FeedbackItemType } from '../types';
 
 const feedbackApi = 'http://localhost:3001/feedback';
 // package.json "proxy": "http://localhost:3001"
@@ -10,7 +10,7 @@ async function getFeedback() {
     headers: {
       'Content-Type': 'application/json',
     },
-  });  
+  });
   return response.json();
 }
 

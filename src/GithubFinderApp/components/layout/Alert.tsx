@@ -16,7 +16,7 @@ const Alert = () => {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <circle cx="12" cy="12" r="10" fill='#FECDD3' />
+              <circle cx="12" cy="12" r="10" fill="#FECDD3" />
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -31,4 +31,6 @@ const Alert = () => {
       )}
     </div>
   );
-};export default Alert;
+};
+
+export default Alert;

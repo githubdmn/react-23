@@ -57,4 +57,5 @@ const UsersSearch = () => {
     </div>
   );
 };
+
 export default UsersSearch;
