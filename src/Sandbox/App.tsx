@@ -1,10 +1,11 @@
-import { UseRefExample01 } from './components';
+import { UseRefExample02 } from './components';
 
 function App() {
   return (
-    <p>
-      Sandbox app <UseRefExample01></UseRefExample01>
-    </p>
+    <div className="container text-center mt-5">
+      <p>Sandbox app</p>
+      <UseRefExample02></UseRefExample02>
+    </div>
   );
 }
 export default App;
