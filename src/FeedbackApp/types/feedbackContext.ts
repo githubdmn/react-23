@@ -4,7 +4,7 @@ import { FeedbackList } from './feedbackList';
 export type FeedbackContextType = {
   feedbackList: FeedbackList;
   isLoading: boolean;
-  deleteFeedbackItem: (id: number) => void;
+  deleteFeedbackItem: (id: string) => void;
   addFeedbackItem: (newFeedback: FeedbackItemType) => void;
-  updateFeedbackItem: (id: number, updatedFeedback: FeedbackItemType) => void;
+  updateFeedbackItem: (id: string, updatedFeedback: FeedbackItemType) => void;
 };

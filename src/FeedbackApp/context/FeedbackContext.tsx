@@ -40,7 +40,7 @@ export const FeedbackProvider = ({ children }: { children: ReactNode }) => {
     fetchData();
   }, []);
 
-  const deleteFeedbackItem = async (id: number) => {
+  const deleteFeedbackItem = async (id: string) => {
     if (window.confirm('Are you sure you want to delete?')) {
       try {
         await deleteFeedback(id);
@@ -56,7 +56,7 @@ export const FeedbackProvider = ({ children }: { children: ReactNode }) => {
 
   const addFeedbackItem = async (newFeedback: FeedbackItemType) => {
     try {
-      newFeedback.id = +customAlphabet(`1234567890`, 5)();
+      newFeedback.id = customAlphabet(`1234567890`, 5)();
       await addFeedback(newFeedback);
       // Optimistically add to state after successful add
       setFeedbackList((prevFeedbackList) => [newFeedback, ...prevFeedbackList]);
@@ -66,7 +66,7 @@ export const FeedbackProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updateFeedbackItem = async (
-    id: number,
+    id: string,
     updatedFeedback: FeedbackItemType,
   ) => {
     try {

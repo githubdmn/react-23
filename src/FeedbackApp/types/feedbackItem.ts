@@ -1,5 +1,5 @@
 export type FeedbackItemType = {
-  id: number;
+  id: string;
   rating: number;
   text: string;
 };

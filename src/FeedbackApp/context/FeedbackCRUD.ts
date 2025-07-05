@@ -25,8 +25,8 @@ async function addFeedback(newFeedback: FeedbackItemType) {
   return await response.json();
 }
 
-async function deleteFeedback(id: number) {
-  const response = await fetch(feedbackApi + '/' + id, {
+async function deleteFeedback(id: string) {
+  const response = await fetch(`${feedbackApi}/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ async function deleteFeedback(id: number) {
   return await response.json();
 }
 
-async function updateFeedback(id: number, updatedFeedback: FeedbackItemType) {
+async function updateFeedback(id: string, updatedFeedback: FeedbackItemType) {
   const response = await fetch(`${feedbackApi}/${id}`, {
     method: 'PUT',
     headers: {

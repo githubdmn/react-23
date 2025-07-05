@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import Card from './Card';
 import Button from './Button';
 import RatingSelect from './RatingSelect';
@@ -12,7 +12,7 @@ function FeedbackForm() {
   const [rating, setRating] = useState(10);
   const { addFeedbackItem } = useContext(FeedbackContext);
 
-  const handleTextOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (text === '') {
       setBtnDisabled(true);
       setMessage('');
@@ -26,11 +26,11 @@ function FeedbackForm() {
     setText(e.target.value);
   };
 
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (text.trim().length > 10) {
       const newFeedback: FeedbackItemType = {
-        id: 0,
+        id: '0',
         text,
         rating,
       };

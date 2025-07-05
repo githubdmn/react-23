@@ -1,4 +1,6 @@
+import { ReactNode } from 'react';
+
 export type CardProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   reverse?: boolean;
 };
