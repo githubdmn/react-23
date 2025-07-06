@@ -1,0 +1,170 @@
+/* Import the Poppins font if not already globally imported or to ensure it's available */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* Main container for the App01Counter */
+.app01-counter-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom right, #A855F7, #EC4899); /* from-purple-500 to-pink-600 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem; /* p-4 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
+    /* animate-fade-in class will be applied via JSX, defined in global index.css */
+}
+
+/* Inner card/content box */
+.app01-counter-card {
+    background-color: #fff;
+    padding: 2rem; /* p-8 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+    border: 1px solid #E9D5FF; /* border-purple-200 */
+    width: 100%;
+    max-width: 24rem; /* max-w-sm (384px) */
+    text-align: center;
+    position: relative;
+}
+
+/* Close button */
+.app01-counter-close-btn {
+    position: absolute;
+    top: 1rem; /* top-4 */
+    right: 1rem; /* right-4 */
+    background-color: #EF4444; /* bg-red-500 */
+    color: #fff; /* text-white */
+    border-radius: 9999px; /* rounded-full */
+    padding: 0.5rem; /* p-2 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 700; /* font-bold */
+    width: 2rem; /* w-8 */
+    height: 2rem; /* h-8 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+    transform: scale(1); /* Initial scale */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+}
+
+.app01-counter-close-btn:hover {
+    background-color: #DC2626; /* hover:bg-red-600 */
+    transform: scale(1.1); /* hover:scale-110 */
+}
+
+.app01-counter-close-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5); /* focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 */
+}
+
+/* Title */
+.app01-counter-title {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 700; /* font-bold */
+    color: #6D28D9; /* text-purple-700 */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+/* Description paragraph */
+.app01-counter-description {
+    font-size: 1.125rem; /* text-lg */
+    color: #374151; /* text-gray-700 */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* Controls container */
+.app01-counter-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* space-y-4 will be handled by applying margin-top to children */
+}
+
+.app01-counter-controls > *:not(:first-child) {
+    margin-top: 1rem; /* space-y-4 */
+}
+
+/* Button group for increment/decrement */
+.app01-counter-btn-group {
+    display: flex;
+    /* space-x-4 will be handled by applying margin-left to children */
+}
+
+.app01-counter-btn-group > *:not(:first-child) {
+    margin-left: 1rem; /* space-x-4 */
+}
+
+/* Counter display */
+.app01-counter-display {
+    font-size: 3rem; /* text-5xl */
+    font-weight: 800; /* font-extrabold */
+    color: #5B21B6; /* text-purple-800 */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+/* Base button styles for App01Counter */
+.app01-counter-btn {
+    font-weight: 700; /* font-bold */
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+    transform: scale(1); /* Initial scale */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+    color: #fff; /* text-white */
+}
+
+.app01-counter-btn:hover {
+    transform: scale(1.05); /* hover:scale-105 */
+}
+
+.app01-counter-btn:focus {
+    outline: none;
+    /* focus:ring-2 focus:ring-opacity-50 will be handled by specific button classes */
+}
+
+/* Specific button styles */
+.app01-counter-btn-increment {
+    background-color: #8B5CF6; /* bg-purple-500 */
+}
+
+.app01-counter-btn-increment:hover {
+    background-color: #7C3AED; /* hover:bg-purple-600 */
+}
+
+.app01-counter-btn-increment:focus {
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5); /* focus:ring-purple-400 */
+}
+
+.app01-counter-btn-decrement {
+    background-color: #EF4444; /* bg-red-500 */
+}
+
+.app01-counter-btn-decrement:hover {
+    background-color: #DC2626; /* hover:bg-red-600 */
+}
+
+.app01-counter-btn-decrement:focus {
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5); /* focus:ring-red-400 */
+}
+
+.app01-counter-btn-reset {
+    background-color: #9CA3AF; /* bg-gray-400 */
+    padding: 0.5rem 1rem; /* py-2 px-4 */ /* Smaller padding for reset button */
+}
+
+.app01-counter-btn-reset:hover {
+    background-color: #6B7280; /* hover:bg-gray-500 */
+}
+
+.app01-counter-btn-reset:focus {
+    box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.5); /* focus:ring-gray-300 */
+}
