@@ -1,8 +1,10 @@
+import { JSX } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Alert, Footer, Navbar } from './components';
 import { Home, About, NotFound, User } from './pages';
 import { GithubProvider, AlertProvider } from './context';
-function App() {
+
+function App(): JSX.Element {
   return (
     <GithubProvider>
       <AlertProvider>

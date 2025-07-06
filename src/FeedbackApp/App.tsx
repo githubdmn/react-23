@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import {
   AboutLinkIcon,
   FeedbackForm,
@@ -9,7 +10,7 @@ import { AboutPage } from './pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { FeedbackProvider } from './context';
 
-function App() {
+function App(): JSX.Element {
   return (
     <FeedbackProvider>
       <BrowserRouter basename="/feedback">
