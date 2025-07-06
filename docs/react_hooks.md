@@ -250,7 +250,7 @@ function Timer() {
 ### 🔹 Diagram
 
 ```
-<App>
+<Index>
  ├─ <MyProvider value="theme: dark">
  │     └── <ComponentA>
  │           └── useContext(MyContext) --> "theme: dark"
@@ -268,7 +268,7 @@ function Component() {
   return <div>Current theme: {theme}</div>;
 }
 
-function App() {
+function Index() {
   return (
     <ThemeContext.Provider value="dark">
       <Component />
@@ -440,10 +440,10 @@ export const ThemeContext = createContext("light");
 ### ✅ Step 2: Create a provider
 
 ```tsx
-// App.tsx
+// Index.tsx
 import { ThemeContext } from './ThemeContext';
 
-function App() {
+function Index() {
   return (
     <ThemeContext.Provider value="dark">
       <Toolbar />
@@ -475,18 +475,18 @@ function Toolbar() {
 Without context:
 
 ```tsx
-<App theme="dark">
+<Index theme="dark">
   <Header theme="dark">
     <Navbar theme="dark" />
   </Header>
-</App>
+</Index>
 ```
 
 With context:
 
 ```tsx
 <ThemeContext.Provider value="dark">
-  <App />
+  <Index />
 </ThemeContext.Provider>
 ```
 

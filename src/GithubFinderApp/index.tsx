@@ -4,7 +4,7 @@ import { Alert, Footer, Navbar } from './components';
 import { Home, About, NotFound, User } from './pages';
 import { GithubProvider, AlertProvider } from './context';
 
-function App(): JSX.Element {
+function Index(): JSX.Element {
   return (
     <GithubProvider>
       <AlertProvider>
@@ -28,4 +28,4 @@ function App(): JSX.Element {
     </GithubProvider>
   );
 }
-export default App;
+export default Index;

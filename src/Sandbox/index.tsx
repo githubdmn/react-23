@@ -1,7 +1,7 @@
 import { JSX } from 'react';
 import { UseRefExample02 } from './components';
 
-function App(): JSX.Element {
+function Index(): JSX.Element {
   return (
     <div className="container text-center mt-5">
       <p>Sandbox app</p>
@@ -9,4 +9,4 @@ function App(): JSX.Element {
     </div>
   );
 }
-export default App;
+export default Index;

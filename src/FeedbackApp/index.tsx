@@ -10,7 +10,7 @@ import { AboutPage } from './pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { FeedbackProvider } from './context';
 
-function App(): JSX.Element {
+function Index(): JSX.Element {
   return (
     <FeedbackProvider>
       <BrowserRouter basename="/feedback">
@@ -36,4 +36,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default Index;
