@@ -58,7 +58,6 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter  basename="/finefoods">
-      <GitHubBanner />
       <KBarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
